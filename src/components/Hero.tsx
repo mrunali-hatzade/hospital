@@ -114,20 +114,23 @@ export default function Hero({ setActiveTab, onTelehealthOpen }: HeroProps) {
 
   return (
     <section style={styles.heroSection}>
-      {/* Background slide images */}
-      {slides.map((slide, idx) => (
-        <div
-          key={idx}
-          className="hero-bg-animated"
-          style={{
-            ...styles.heroBg,
-            backgroundImage: `url('${slide.bgImage}')`,
-            opacity: currentSlide === idx ? 1 : 0,
-            transition: "opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1)",
-            pointerEvents: "none",
-          }}
-        />
-      ))}
+      {/* Background video loop backdrop */}
+      <video
+        src="/vdo.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+      />
 
       {/* Gradient overlay — makes left side readable, right side shows through */}
       <div style={styles.heroOverlay} />
