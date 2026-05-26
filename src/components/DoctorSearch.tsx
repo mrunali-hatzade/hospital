@@ -205,7 +205,7 @@ export default function DoctorSearch({
         {filteredDoctors.length > 0 ? (
           filteredDoctors.map((doc, idx) => (
             <div key={doc.id} className={`card glass reveal bouncy-hover reveal-delay-${(idx % 3) + 1}`} style={styles.docCard}>
-              <div style={styles.cardHeader}>
+              <div className="doctor-card-header" style={styles.cardHeader}>
                 <div style={styles.avatarWrapper}>
                   <Image
                     src={doc.imgUrl}
@@ -290,7 +290,7 @@ export default function DoctorSearch({
 
               <p style={styles.bioExcerpt}>{doc.bio.substring(0, 100)}...</p>
 
-              <div style={styles.cardActions}>
+              <div className="doctor-card-actions" style={styles.cardActions}>
                 <button className="btn btn-outline" style={styles.cardBtn} onClick={() => setSelectedDoctor(doc)}>
                   View Profile
                 </button>

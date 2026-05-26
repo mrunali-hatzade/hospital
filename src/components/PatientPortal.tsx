@@ -260,7 +260,7 @@ export default function PatientPortal() {
                           setActiveTab("reports");
                         }}
                         style={styles.summaryReportRow}
-                        className="glass"
+                        className="glass summary-report-row"
                       >
                         <span style={{ fontWeight: 700, flex: 1 }}>{rep.name}</span>
                         <span style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>{rep.date}</span>

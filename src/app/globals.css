@@ -524,3 +524,120 @@ body {
   border: none !important;
   box-shadow: none !important;
 }
+
+/* Scroll to Top Button */
+.go-to-top {
+  position: fixed;
+  bottom: 104px;
+  right: 32px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: white;
+  border: 1px solid var(--border-glass);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(0, 128, 128, 0.25);
+  z-index: 998;
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.go-to-top.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.go-to-top:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(0, 128, 128, 0.35);
+}
+
+.go-to-top:active {
+  transform: translateY(-2px) scale(0.95);
+}
+@media (max-width: 768px) {
+  .go-to-top {
+    bottom: 96px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* Responsive Layout Media Overrides */
+@media (max-width: 1024px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .mobile-menu-btn {
+    display: none !important;
+  }
+  .mobile-drawer {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-bar-custom {
+    display: none !important;
+  }
+  
+  .navbar-container {
+    height: 56px !important;
+  }
+  
+  .logo-text-custom {
+    font-size: 1.15rem !important;
+  }
+  
+  .mobile-drawer {
+    top: 56px !important;
+  }
+  
+  .hero-title {
+    font-size: 2.1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .doctor-card-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  
+  .doctor-card-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+  
+  .doctor-card-actions button {
+    width: 100% !important;
+  }
+  
+  .summary-report-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+  
+  .summary-report-row div {
+    text-align: left !important;
+    min-width: unset !important;
+  }
+}

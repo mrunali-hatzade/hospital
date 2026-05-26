@@ -11,6 +11,7 @@ interface NavbarProps {
 export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [activeScrollSection, setActiveScrollSection] = useState("");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     // Sync theme on load
@@ -125,7 +126,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
   return (
     <header style={styles.header}>
       {/* Upper Top Bar Header */}
-      <div style={styles.topBar}>
+      <div className="top-bar-custom" style={styles.topBar}>
         <div className="container" style={styles.topBarContainer}>
           {/* Left: Contact Info */}
           <div style={styles.topBarLeft}>
@@ -168,7 +169,7 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
 
       {/* Main Sticky Navbar Area */}
       <div className="glass" style={styles.mainNavbar}>
-        <div className="container" style={styles.container}>
+        <div className="container navbar-container" style={styles.container}>
           {/* Left Side: Logo and Title */}
           <div style={styles.leftGroup}>
             <div style={styles.logoArea} onClick={() => handleNavClick("home", "tab")}>
@@ -181,10 +182,10 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
                   style={{ objectFit: "contain", borderRadius: "50%" }}
                 />
               </div>
-              <span style={styles.logoText}>Nakade<span style={{ color: "var(--secondary)" }}> Hospital</span></span>
+              <span className="logo-text-custom" style={styles.logoText}>Nakade<span style={{ color: "var(--secondary)" }}> Hospital</span></span>
             </div>
 
-            <nav style={styles.nav}>
+            <nav className="desktop-nav" style={styles.nav}>
               {navItems.map((item) => {
                 const isTabActive = item.type === "tab" && activeTab === item.id;
                 const isScrollActive = item.type === "scroll" && activeTab === "home" && activeScrollSection === item.id;
@@ -231,9 +232,62 @@ export default function Navbar({ activeTab, setActiveTab }: NavbarProps) {
                 </svg>
               )}
             </button>
+
+            <button 
+              className="mobile-menu-btn" 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+              style={styles.mobileMenuBtn}
+              title="Toggle Menu"
+            >
+              {isMobileMenuOpen ? (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              ) : (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="3" y1="12" x2="21" y2="12"></line>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+              )}
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Mobile Menu Drawer */}
+      {isMobileMenuOpen && (
+        <div className="mobile-drawer glass animate-slide" style={styles.mobileDrawer}>
+          <nav style={styles.mobileNav}>
+            {navItems.map((item) => {
+              const isTabActive = item.type === "tab" && activeTab === item.id;
+              const isScrollActive = item.type === "scroll" && activeTab === "home" && activeScrollSection === item.id;
+              const isHomeActiveTab = item.id === "home" && activeTab === "home" && !activeScrollSection;
+              
+              const active = isScrollActive || (item.id === "home" ? isHomeActiveTab : isTabActive);
+
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    handleNavClick(item.id, item.type);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  style={{
+                    ...styles.mobileNavLink,
+                    color: active ? "var(--primary)" : "var(--text-main)",
+                    fontWeight: active ? "700" : "600",
+                    backgroundColor: active ? "var(--primary-light)" : "transparent",
+                  }}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
@@ -377,5 +431,46 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "var(--primary-light)",
+  },
+  mobileMenuBtn: {
+    display: "none",
+    background: "none",
+    border: "none",
+    cursor: "pointer",
+    padding: "8px",
+    borderRadius: "50%",
+    color: "var(--text-main)",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "var(--primary-light)",
+    transition: "var(--transition)",
+  },
+  mobileDrawer: {
+    position: "absolute",
+    top: "100px",
+    left: 0,
+    width: "100%",
+    padding: "20px 32px",
+    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
+    borderTop: "1px solid var(--border-glass)",
+    borderBottom: "1px solid var(--border-glass)",
+    zIndex: 999,
+  },
+  mobileNav: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+  },
+  mobileNavLink: {
+    background: "none",
+    border: "none",
+    padding: "12px 16px",
+    borderRadius: "var(--radius-sm)",
+    cursor: "pointer",
+    fontSize: "0.95rem",
+    textAlign: "left",
+    fontFamily: "var(--font-heading)",
+    transition: "var(--transition)",
+    width: "100%",
   },
 };

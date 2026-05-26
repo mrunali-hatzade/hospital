@@ -85,6 +85,7 @@ export default function Home() {
   const [preSelectedDoctor, setPreSelectedDoctor] = useState("");
   const [isTelehealthOpen, setIsTelehealthOpen] = useState(false);
   const [activeGalleryImage, setActiveGalleryImage] = useState<string | null>(null);
+  const [showGoToTop, setShowGoToTop] = useState(false);
 
   // Lifted Doctor Availability State
   const [doctors, setDoctors] = useState<Doctor[]>([
@@ -191,6 +192,19 @@ export default function Home() {
     reveals.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, [activeTab]);
+
+  // Scroll to Top visibility control
+  useEffect(() => {
+    const handleScrollVisibility = () => {
+      if (window.scrollY > 300) {
+        setShowGoToTop(true);
+      } else {
+        setShowGoToTop(false);
+      }
+    };
+    window.addEventListener("scroll", handleScrollVisibility);
+    return () => window.removeEventListener("scroll", handleScrollVisibility);
+  }, []);
 
   // FAQ Accordion states
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(null);
@@ -830,6 +844,17 @@ export default function Home() {
           />
         )}
       </main>
+
+      {/* Scroll to Top Button */}
+      <button
+        className={`go-to-top ${showGoToTop ? "visible" : ""}`}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        title="Scroll to Top"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </button>
 
       {/* Floating Symptom Chatbot Widget */}
       <SymptomChecker

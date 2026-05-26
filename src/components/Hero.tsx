@@ -143,7 +143,7 @@ export default function Hero({ setActiveTab, onTelehealthOpen }: HeroProps) {
             <span style={styles.eyebrow} className="badge badge-primary">
               {activeSlide.badge}
             </span>
-            <h1 style={styles.title}>
+            <h1 className="hero-title" style={styles.title}>
               {activeSlide.title}
             </h1>
             <p style={styles.description}>

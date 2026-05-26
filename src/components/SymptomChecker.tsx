@@ -29,7 +29,7 @@ export default function SymptomChecker({
     {
       id: "msg-1",
       sender: "bot",
-      text: "Hello! I'm Nakade AI, your virtual symptom assistant. Please describe what symptoms you are experiencing, or select one of the common concerns below to get guided support:",
+      text: "Hello! I'm Nakade Doctor AI, your virtual medical assistant. Please describe what symptoms you are experiencing, or select one of the common concerns below to get guided support:",
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       actions: [
         { label: "🤰 Pregnancy & Maternity", action: "symptom", payload: "pregnancy" },
@@ -153,6 +153,8 @@ export default function SymptomChecker({
           ...styles.toggleBtn,
           transform: isOpen ? "rotate(45deg) scale(0.9)" : "rotate(0) scale(1)",
           backgroundColor: isOpen ? "var(--danger)" : "var(--primary)",
+          padding: isOpen ? undefined : 0,
+          overflow: "hidden",
         }}
         onClick={() => setIsOpen(!isOpen)}
         title="Open Symptom Assistant"
@@ -160,9 +162,25 @@ export default function SymptomChecker({
         {isOpen ? (
           <span style={{ fontSize: "1.6rem", color: "white" }}>&times;</span>
         ) : (
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-          </svg>
+          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+            <img 
+              src="/cartoon_doctor.png" 
+              alt="Doctor Chatbot" 
+              style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} 
+            />
+            {/* Active Indicator dot */}
+            <span style={{
+              position: "absolute",
+              bottom: "4px",
+              right: "4px",
+              width: "12px",
+              height: "12px",
+              borderRadius: "50%",
+              backgroundColor: "var(--success)",
+              border: "2px solid white",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.2)"
+            }} />
+          </div>
         )}
       </button>
 
@@ -172,9 +190,15 @@ export default function SymptomChecker({
           {/* Header */}
           <div style={styles.chatHeader}>
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              <div style={styles.chatAvatar}>✨</div>
+              <div style={{ ...styles.chatAvatar, overflow: "hidden", border: "1px solid rgba(255,255,255,0.3)" }}>
+                <img 
+                  src="/cartoon_doctor.png" 
+                  alt="Doctor Chatbot Avatar" 
+                  style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} 
+                />
+              </div>
               <div>
-                <h4 style={{ fontSize: "0.95rem", color: "white", fontWeight: 700 }}>Nakade AI Assistant</h4>
+                <h4 style={{ fontSize: "0.95rem", color: "white", fontWeight: 700 }}>Nakade Doctor AI</h4>
                 <p style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.8)" }}>Online • Automated Diagnosis Guidance</p>
               </div>
             </div>
@@ -190,7 +214,15 @@ export default function SymptomChecker({
                   justifyContent: msg.sender === "user" ? "flex-end" : "flex-start",
                 }}
               >
-                {msg.sender === "bot" && <div style={styles.botIconMini}>🤖</div>}
+                {msg.sender === "bot" && (
+                  <div style={{ ...styles.botIconMini, overflow: "hidden", border: "1px solid var(--border)" }}>
+                    <img 
+                      src="/cartoon_doctor.png" 
+                      alt="Doctor Chatbot Mini" 
+                      style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} 
+                    />
+                  </div>
+                )}
                 
                 <div style={{ display: "flex", flexDirection: "column", maxWidth: "80%" }}>
                   <div
