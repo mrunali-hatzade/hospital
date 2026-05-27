@@ -90,6 +90,21 @@ export default function Home() {
   // Lifted Doctor Availability State
   const [doctors, setDoctors] = useState<Doctor[]>([
     {
+      id: "dr-pooja-nakade",
+      name: "Dr. Pooja Nakade",
+      specialty: "Gynecology & Obstetrics",
+      rating: 4.8,
+      reviewsCount: 98,
+      availableToday: true,
+      onlineConsult: true,
+      imgUrl: "/doctor_2.png",
+      bio: "Dr. Pooja Nakade is a dedicated Obstetrician & Gynecologist specializing in high-risk pregnancies, maternal wellness care, and gynecological checkups in Lakhandur.",
+      education: "MBBS, DGO - Gynecology & Obstetrics, Laparoscopic Surgery training",
+      languages: ["Marathi", "Hindi", "English"],
+      npi: "MCI-61840",
+      availabilityStatus: "In Consultation",
+    },
+    {
       id: "dr-lalit-nakade",
       name: "Dr. Lalit Nakade",
       specialty: "Sonography & Diagnostics",
@@ -105,49 +120,34 @@ export default function Home() {
       availabilityStatus: "Available",
     },
     {
-      id: "dr-pallavi-nakade",
-      name: "Dr. Pallavi Nakade",
-      specialty: "Gynecology & Obstetrics",
-      rating: 4.8,
-      reviewsCount: 98,
-      availableToday: true,
-      onlineConsult: true,
-      imgUrl: "/doctor_2.png",
-      bio: "Dr. Pallavi Nakade is a dedicated Obstetrician & Gynecologist specializing in high-risk pregnancies, maternal wellness care, and gynecological checkups in Lakhandur.",
-      education: "MBBS, DGO - Gynecology & Obstetrics, Laparoscopic Surgery training",
-      languages: ["Marathi", "Hindi", "English"],
-      npi: "MCI-61840",
-      availabilityStatus: "In Consultation",
-    },
-    {
-      id: "dr-amit",
-      name: "Dr. Amit Rahangdale",
-      specialty: "General Medical Care",
-      rating: 4.7,
-      reviewsCount: 86,
-      availableToday: false,
-      onlineConsult: true,
-      imgUrl: "/doctor_1.png",
-      bio: "Dr. Amit specializes in primary family medicine, chronic disease management, and emergency clinical triaging.",
-      education: "MBBS, MD - General Medicine",
-      languages: ["Marathi", "Hindi", "English"],
-      npi: "MCI-48371",
-      availabilityStatus: "Off Duty",
-    },
-    {
-      id: "dr-sneha",
-      name: "Dr. Sneha Tembhurne",
+      id: "dr-pooja-pediatrics",
+      name: "Dr. Pooja Nakade",
       specialty: "Pediatrics & Child Care",
       rating: 4.85,
       reviewsCount: 72,
       availableToday: true,
       onlineConsult: false,
       imgUrl: "/doctor_2.png",
-      bio: "Dr. Sneha is a compassionate pediatric consultant providing child growth tracking, basic immunizations, and general pediatric clinical care.",
-      education: "MBBS, DCH - Child Health",
+      bio: "Dr. Pooja Nakade is a compassionate consultant providing infant health monitoring, newborn child growth tracking, and standard immunizations.",
+      education: "MBBS, DGO - Gynecology & Obstetrics, Child Wellness Training",
       languages: ["Marathi", "Hindi", "English"],
-      npi: "MCI-39283",
+      npi: "MCI-61840",
       availabilityStatus: "Available",
+    },
+    {
+      id: "dr-lalit-general",
+      name: "Dr. Lalit Nakade",
+      specialty: "General Medical Care",
+      rating: 4.7,
+      reviewsCount: 86,
+      availableToday: false,
+      onlineConsult: true,
+      imgUrl: "/doctor_1.png",
+      bio: "Dr. Lalit Nakade specializes in primary family medicine, chronic disease management, and emergency clinical triaging at our Lakhandur hospital.",
+      education: "MBBS - Government Medical College",
+      languages: ["Marathi", "Hindi", "English"],
+      npi: "MCI-52917",
+      availabilityStatus: "Off Duty",
     },
   ]);
 
@@ -338,8 +338,30 @@ export default function Home() {
                 </div>
 
                 <div style={styles.doctorsSectionGrid}>
-                  {/* Doctor 1: Dr. Lalit Nakade */}
-                  <div className="card glass reveal active" style={styles.drProfileCard}>
+                  {/* Doctor 1: Dr. Pooja Nakade */}
+                  <div className="card glass reveal bouncy-hover" style={styles.drProfileCard}>
+                    <div style={styles.drImageWrapper}>
+                      <img src="/doctor_2.png" alt="Dr. Pooja Nakade" style={styles.drProfileImg} />
+                      <span style={styles.drBadgeOverlay}>Gynecology &amp; Pediatrics Specialist</span>
+                    </div>
+                    <div style={styles.drProfileContent}>
+                      <h3 style={styles.drName}>Dr. Pooja Nakade</h3>
+                      <p style={styles.drTitle}>Obstetrician, Gynecologist &amp; Infertility Consultant</p>
+                      <p style={styles.drBio}>
+                        Dr. Pooja Nakade is a dedicated women's health specialist. She is an expert in maternity care, high-risk pregnancy management, normal/painless deliveries, and laparoscopic gynecological care in Lakhandur.
+                      </p>
+                      <div style={styles.credentialsList}>
+                        <p style={styles.credentialItem}>• MBBS, DGO (Government Medical College)</p>
+                        <p style={styles.credentialItem}>• 12+ Years Clinical Experience</p>
+                      </div>
+                      <button onClick={() => { setSelectedDepartment("Gynecology & Obstetrics"); setPreSelectedDoctor("Dr. Pooja Nakade"); setActiveTab("booking"); }} className="btn btn-primary" style={{ marginTop: "16px", width: "100%", justifyContent: "center" }}>
+                        📅 Consult Dr. Pooja
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Doctor 2: Dr. Lalit Nakade */}
+                  <div className="card glass reveal bouncy-hover reveal-delay-2" style={styles.drProfileCard}>
                     <div style={styles.drImageWrapper}>
                       <img src="/doctor_1.png" alt="Dr. Lalit Nakade" style={styles.drProfileImg} />
                       <div style={styles.drBadgeOverlay}>Chief Physician</div>
@@ -357,30 +379,6 @@ export default function Home() {
                         <div style={styles.credentialItem}>✔️ Fluent in Marathi, Hindi, &amp; English</div>
                       </div>
                       <button onClick={() => { setSelectedDepartment("Sonography"); setPreSelectedDoctor("Dr. Lalit Nakade"); setActiveTab("booking"); }} className="btn btn-primary" style={{ marginTop: "16px", width: "100%", justifyContent: "center" }}>
-                        Book Appointment &rarr;
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Doctor 2: Dr. Pallavi Nakade */}
-                  <div className="card glass reveal active" style={styles.drProfileCard}>
-                    <div style={styles.drImageWrapper}>
-                      <img src="/doctor_2.png" alt="Dr. Pallavi Nakade" style={styles.drProfileImg} />
-                      <div style={styles.drBadgeOverlay}>Gynecologist</div>
-                    </div>
-                    <div style={styles.drProfileContent}>
-                      <h3 style={styles.drName}>Dr. Pallavi Nakade</h3>
-                      <p style={styles.drTitle}>MBBS, DGO • Consultant Gynecologist &amp; Obstetrician</p>
-                      <p style={styles.drBio}>
-                        Dr. Pallavi Nakade is a dedicated women's health specialist. She is an expert in maternity care, high-risk pregnancy management, normal/painless deliveries, and laparoscopic gynecological care in Lakhandur.
-                      </p>
-                      <div style={styles.credentialsList}>
-                        <div style={styles.credentialItem}>✔️ MBBS &amp; DGO - Gynecology &amp; Obstetrics</div>
-                        <div style={styles.credentialItem}>✔️ Specialization in High-Risk Pregnancies</div>
-                        <div style={styles.credentialItem}>✔️ Trained in Laparoscopic Surgery</div>
-                        <div style={styles.credentialItem}>✔️ Fluent in Marathi, Hindi, &amp; English</div>
-                      </div>
-                      <button onClick={() => { setSelectedDepartment("Gynecology"); setPreSelectedDoctor("Dr. Pallavi Nakade"); setActiveTab("booking"); }} className="btn btn-primary" style={{ marginTop: "16px", width: "100%", justifyContent: "center" }}>
                         Book Appointment &rarr;
                       </button>
                     </div>

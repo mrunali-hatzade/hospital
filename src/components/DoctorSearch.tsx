@@ -88,7 +88,7 @@ export default function DoctorSearch({
     .filter((doc) => {
       const matchesSearch = doc.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         doc.specialty.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesDept = selectedDepartment === "" || doc.specialty === selectedDepartment;
+      const matchesDept = selectedDepartment === "" || doc.specialty === selectedDepartment || doc.specialty.toLowerCase().includes(selectedDepartment.toLowerCase().split(" ")[0]);
       const matchesAvailable = !filterAvailable || (doc.availabilityStatus === "Available" || doc.availabilityStatus === "In Consultation");
       const matchesOnline = !filterOnline || doc.onlineConsult;
       
@@ -151,10 +151,10 @@ export default function DoctorSearch({
                 style={styles.selectInput}
               >
                 <option value="">All Specialties</option>
-                <option value="Cardiology">Cardiology</option>
-                <option value="Neurology">Neurology</option>
-                <option value="Pediatrics">Pediatrics</option>
-                <option value="Orthopedics">Orthopedics</option>
+                <option value="Sonography & Diagnostics">Sonography & Diagnostics</option>
+                <option value="Gynecology & Obstetrics">Gynecology & Obstetrics</option>
+                <option value="Pediatrics & Child Care">Pediatrics & Child Care</option>
+                <option value="General Medical Care">General Medical Care</option>
               </select>
             </div>
 

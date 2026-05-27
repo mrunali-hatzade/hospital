@@ -121,7 +121,7 @@ export default function PatientPortal() {
         return rx;
       })
     );
-    alert("Refill request sent to Dr. Jenkins! You will be notified when it is ready at the designated pharmacy.");
+    alert("Refill request sent to Dr. Lalit Nakade! You will be notified when it is ready at the designated pharmacy.");
   };
 
   return (
@@ -229,7 +229,7 @@ export default function PatientPortal() {
                       <div style={styles.bioGrid}>
                         <div><span style={styles.bioLabel}>Blood Type:</span> <strong style={styles.bioVal}>O Positive (O+)</strong></div>
                         <div><span style={styles.bioLabel}>Allergies:</span> <strong style={{ ...styles.bioVal, color: "var(--danger)" }}>Penicillin</strong></div>
-                        <div><span style={styles.bioLabel}>Primary Doctor:</span> <strong style={styles.bioVal}>Dr. Sarah Jenkins</strong></div>
+                        <div><span style={styles.bioLabel}>Primary Doctor:</span> <strong style={styles.bioVal}>Dr. Lalit Nakade</strong></div>
                         <div><span style={styles.bioLabel}>Insurance status:</span> <span className="badge badge-success" style={{ fontSize: "0.7rem" }}>Active</span></div>
                       </div>
                     </div>
@@ -242,8 +242,8 @@ export default function PatientPortal() {
                           <span style={styles.calDay}>08</span>
                         </div>
                         <div style={{ flexGrow: 1 }}>
-                          <h5 style={{ fontSize: "1rem", fontWeight: 700 }}>Cardiology Check-up</h5>
-                          <p style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>Dr. Sarah Jenkins • 10:00 AM</p>
+                          <h5 style={{ fontSize: "1rem", fontWeight: 700 }}>Sonography Check-up</h5>
+                          <p style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>Dr. Lalit Nakade • 10:00 AM</p>
                         </div>
                         <span className="badge badge-primary" style={{ fontSize: "0.65rem" }}>In Person</span>
                       </div>

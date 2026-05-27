@@ -8,6 +8,7 @@ interface Message {
   text: string;
   timestamp: string;
   actions?: { label: string; action: string; payload?: any }[];
+  avatar?: string;
 }
 
 interface SymptomCheckerProps {
@@ -37,6 +38,7 @@ export default function SymptomChecker({
         { label: "🧸 Child Health & Vaccines", action: "symptom", payload: "child_care" },
         { label: "🤒 Fever & General Illness", action: "symptom", payload: "general_illness" },
       ],
+      avatar: "/doctor_2.png",
     },
   ]);
 
@@ -47,13 +49,14 @@ export default function SymptomChecker({
     }
   }, [messages, isOpen]);
 
-  const addMessage = (sender: "bot" | "user", text: string, actions?: any[]) => {
+  const addMessage = (sender: "bot" | "user", text: string, actions?: any[], avatar?: string) => {
     const newMsg: Message = {
       id: `msg-${Math.random()}`,
       sender,
       text,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       actions,
+      avatar,
     };
     setMessages((prev) => [...prev, newMsg]);
   };
@@ -75,37 +78,41 @@ export default function SymptomChecker({
     if (query.includes("pregnancy") || query.includes("pregnant") || query.includes("delivery") || query.includes("gyn") || query.includes("maternity") || query.includes("women")) {
       addMessage(
         "bot",
-        "🤰 Gynecology & Obstetrics query detected. For prenatal care, ultrasound scans, maternity consults, or routine female checkups, you can schedule an appointment with Dr. Pallavi Nakade.",
+        "🤰 Gynecology & Obstetrics query detected. For prenatal care, ultrasound scans, maternity consults, or routine female checkups, you can schedule an appointment with Dr. Pooja Nakade.",
         [
-          { label: "📅 Book Gynecology Appointment", action: "book", payload: { dept: "Gynecology", doctor: "Dr. Pallavi Nakade" } },
+          { label: "📅 Book Gynecology Appointment", action: "book", payload: { dept: "Gynecology & Obstetrics", doctor: "Dr. Pooja Nakade" } },
           { label: "🏥 View Gynecology Specialty", action: "tab", payload: { tab: "departments", dept: "Gynecology" } },
-        ]
+        ],
+        "/doctor_2.png"
       );
     } else if (query.includes("scan") || query.includes("ultrasound") || query.includes("sonography") || query.includes("diagnostics")) {
       addMessage(
         "bot",
         "🔍 Sonography & Diagnostics. For prenatal 3D/4D ultrasound, abdominal scans, or diagnostic imaging, our chief specialist Dr. Lalit Nakade is available for scans and reports.",
         [
-          { label: "📅 Book Sonography Appointment", action: "book", payload: { dept: "Sonography", doctor: "Dr. Lalit Nakade" } },
+          { label: "📅 Book Sonography Appointment", action: "book", payload: { dept: "Sonography & Diagnostics", doctor: "Dr. Lalit Nakade" } },
           { label: "🏥 View Diagnostics Specialty", action: "tab", payload: { tab: "departments", dept: "Sonography" } },
-        ]
+        ],
+        "/doctor_1.png"
       );
     } else if (query.includes("child") || query.includes("baby") || query.includes("kid") || query.includes("pediatr") || query.includes("vaccin")) {
       addMessage(
         "bot",
-        "🧸 Pediatrics & Child Care. For newborn checkups, child vaccination schedules, and standard pediatric illness care, you can schedule a checkup with Dr. Sneha Tembhurne.",
+        "🧸 Pediatrics & Child Care. For newborn checkups, child vaccination schedules, and standard pediatric illness care, you can schedule a checkup with Dr. Pooja Nakade.",
         [
-          { label: "📅 Book Pediatrics Appointment", action: "book", payload: { dept: "Pediatrics", doctor: "Dr. Sneha Tembhurne" } },
-        ]
+          { label: "📅 Book Pediatrics Appointment", action: "book", payload: { dept: "Pediatrics & Child Care", doctor: "Dr. Pooja Nakade" } },
+        ],
+        "/doctor_2.png"
       );
     } else if (query.includes("cough") || query.includes("fever") || query.includes("cold") || query.includes("flu") || query.includes("pain") || query.includes("head") || query.includes("migraine")) {
       addMessage(
         "bot",
-        "🤒 General Medical concerns. For seasonal fever, primary medicine checkups, or general OPD consultation, you can consult with Dr. Amit Rahangdale or Dr. Lalit Nakade.",
+        "🤒 General Medical concerns. For seasonal fever, primary medicine checkups, or general OPD consultation, you can consult with Dr. Lalit Nakade.",
         [
-          { label: "📅 Book General Medicine", action: "book", payload: { dept: "General", doctor: "Dr. Amit Rahangdale" } },
+          { label: "📅 Book General Medicine", action: "book", payload: { dept: "General Medical Care", doctor: "Dr. Lalit Nakade" } },
           { label: "📞 Call Clinic: +91 82753 97699", action: "call", payload: "+918275397699" },
-        ]
+        ],
+        "/doctor_1.png"
       );
     } else {
       addMessage(
@@ -164,7 +171,7 @@ export default function SymptomChecker({
         ) : (
           <div style={{ position: "relative", width: "100%", height: "100%" }}>
             <img 
-              src="/cartoon_doctor.png" 
+              src="/doctor_2.png" 
               alt="Doctor Chatbot" 
               style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} 
             />
@@ -192,7 +199,7 @@ export default function SymptomChecker({
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <div style={{ ...styles.chatAvatar, overflow: "hidden", border: "1px solid rgba(255,255,255,0.3)" }}>
                 <img 
-                  src="/cartoon_doctor.png" 
+                  src="/doctor_2.png" 
                   alt="Doctor Chatbot Avatar" 
                   style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} 
                 />
@@ -217,7 +224,7 @@ export default function SymptomChecker({
                 {msg.sender === "bot" && (
                   <div style={{ ...styles.botIconMini, overflow: "hidden", border: "1px solid var(--border)" }}>
                     <img 
-                      src="/cartoon_doctor.png" 
+                      src={msg.avatar || "/doctor_2.png"} 
                       alt="Doctor Chatbot Mini" 
                       style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} 
                     />

@@ -25,7 +25,7 @@ export default function HeroEcgCanvas() {
 
     // Pre-load doctor image
     const doctor = new Image();
-    doctor.src = "/doctor_1.png";
+    doctor.src = "/doctor_2.png";
 
     // ECG profile
     const ecg = [

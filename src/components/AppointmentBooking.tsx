@@ -40,7 +40,7 @@ export default function AppointmentBooking({
   useEffect(() => {
     if (selectedDepartment) {
       const filtered = doctors
-        .filter((d) => d.specialty === selectedDepartment)
+        .filter((d) => selectedDepartment === "" || d.specialty === selectedDepartment || d.specialty.toLowerCase().includes(selectedDepartment.toLowerCase().split(" ")[0]))
         .map((d) => d.name);
       setDoctorList(filtered);
       // If preselected doctor matches the department, keep it. Otherwise, clean doctor state.
@@ -185,10 +185,10 @@ export default function AppointmentBooking({
                     className="form-input"
                   >
                     <option value="">Select a specialty...</option>
-                    <option value="Cardiology">Cardiology (Heart Health)</option>
-                    <option value="Neurology">Neurology (Brain & Spine)</option>
-                    <option value="Pediatrics">Pediatrics (Child Health)</option>
-                    <option value="Orthopedics">Orthopedics (Bones & Joints)</option>
+                    <option value="Sonography & Diagnostics">Sonography & Diagnostics</option>
+                    <option value="Gynecology & Obstetrics">Gynecology & Obstetrics (Maternity)</option>
+                    <option value="Pediatrics & Child Care">Pediatrics & Child Care</option>
+                    <option value="General Medical Care">General Medical Care</option>
                   </select>
                 </div>
 

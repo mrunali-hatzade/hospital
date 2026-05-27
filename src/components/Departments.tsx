@@ -43,7 +43,7 @@ export default function Departments({ setActiveTab, setSelectedDepartment }: Dep
       ),
       shortDesc: "Complete maternity, pregnancy scans, and gynecological care.",
       fullDesc: "Our department offers comprehensive care for women through all stages of life, specializing in prenatal monitoring, maternity support, and advanced gynecological therapeutics.",
-      chief: "Dr. Pallavi Nakade, MBBS, DGO",
+      chief: "Dr. Pooja Nakade, MBBS, DGO",
       services: ["Prenatal Screenings", "Normal & Cesarean Delivery Packages", "Maternity Wellness Care", "Infertility Counseling", "Gynecological Laparoscopic Surgeries"],
       hours: "Mon - Sat: 10:00 AM - 7:00 PM",
     },
